@@ -1,0 +1,5 @@
+name: VanilandWorldGen
+version: '${version}'
+main: land.vani.plugin.worldgen.WorldGenPlugin
+api-version: 1.17
+authors: [ rona_tombo ]
