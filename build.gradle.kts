@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "land.vani"
-version = "0.1.0"
+version = "0.1.2"
 
 repositories {
     mavenCentral()
@@ -44,7 +44,6 @@ tasks {
     }
 
     processResources {
-        include("plugin.yml")
         expand("version" to version)
     }
 }

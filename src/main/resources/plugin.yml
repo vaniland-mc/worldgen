@@ -3,3 +3,9 @@ version: '${version}'
 main: land.vani.plugin.worldgen.WorldGenPlugin
 api-version: 1.17
 authors: [ rona_tombo ]
+loadbefore:
+  - Multiverse-Core
+
+permissions:
+  worldgen.command:
+    default: op
