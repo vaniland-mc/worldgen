@@ -1,0 +1,41 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "maven"
+      ],
+      "registryUrls": [
+        "https://repo.maven.apache.org/maven2/",
+        "https://oss.sonatype.org/content/groups/public/",
+        "https://jitpack.io",
+        "https://plugins.gradle.org/m2/"
+      ]
+    },
+    {
+      "matchPackagePrefixes": [
+        "io.ktor:"
+      ],
+      "groupName": "ktor"
+    },
+    {
+      "matchPackagePrefixes": [
+        "io.kotest:"
+      ],
+      "groupName": "kotest"
+    },
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true
+    }
+  ],
+  "commitMessagePrefix": "⬆️ ",
+  "labels": [
+    "dependencies"
+  ]
+}
