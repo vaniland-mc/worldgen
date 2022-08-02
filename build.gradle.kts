@@ -1,8 +1,11 @@
+import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.5.31"
     id("com.github.johnrengelman.shadow") version "7.1.0"
+
+    id("io.gitlab.arturbosch.detekt") version "1.21.0"
 }
 
 group = "land.vani"
@@ -45,5 +48,13 @@ tasks {
 
     processResources {
         expand("version" to version)
+    }
+
+    withType<Detekt> {
+        jvmTarget = "$targetJavaVersion"
+        reports {
+            xml.required.set(true)
+            sarif.required.set(true)
+        }
     }
 }
