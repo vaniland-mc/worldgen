@@ -17,7 +17,7 @@ class WorldGenPlugin : McorouhlinKotlinPlugin() {
         registerCommands()
     }
 
-    private fun registerCommands() {
+    private suspend fun registerCommands() {
         val command = command<CommandSender>("worldgen") {
             required { it.hasPermission(Permissions.COMMAND) }
 
