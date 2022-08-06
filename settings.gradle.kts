@@ -3,6 +3,7 @@ rootProject.name = "worldgen"
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        maven("https://repo.jpenilla.xyz/snapshots/")
+        mavenCentral()
+        maven("https://repo.papermc.io/repository/maven-public/")
     }
 }
