@@ -42,7 +42,7 @@ dependencies {
     }
 
     implementation("land.vani.mcorouhlin:mcorouhlin-api:6.0.2")
-    implementation("land.vani.mcorouhlin:mcorouhlin-paper:6.0.0")
+    implementation("land.vani.mcorouhlin:mcorouhlin-paper:6.0.2")
 //    implementation("land.vani.mcorouhlin:mcorouhlin-api:SNAPSHOT")
 //    implementation("land.vani.mcorouhlin:mcorouhlin-paper:SNAPSHOT")
 
