@@ -5,7 +5,7 @@ import land.vani.mcorouhlin.paper.McorouhlinKotlinPlugin
 import land.vani.mcorouhlin.paper.permission.hasPermission
 import land.vani.mcorouhlin.permission.registerPermissions
 import org.bukkit.command.CommandSender
-import org.bukkit.generator.ChunkGenerator
+import org.bukkit.generator.BiomeProvider
 
 class WorldGenPlugin : McorouhlinKotlinPlugin() {
     private val presetsConfig = PresetsConfig(this)
@@ -31,12 +31,10 @@ class WorldGenPlugin : McorouhlinKotlinPlugin() {
         registerCommand(command)
     }
 
-    override fun getDefaultWorldGenerator(worldName: String, id: String?): ChunkGenerator {
-        return ListChunkGenerator(
-            ListBiomeProvider(
-                presetsConfig.presets[id ?: "default"]
-                    ?.allowedBiomes.orEmpty()
-            )
+    override fun getDefaultBiomeProvider(worldName: String, id: String?): BiomeProvider =
+        ListBiomeProvider(
+            presetsConfig.presets[id ?: "default"]
+                ?.allowedBiomes
+                .orEmpty()
         )
-    }
 }

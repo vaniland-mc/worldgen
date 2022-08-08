@@ -14,6 +14,7 @@ import org.bukkit.block.Biome
 import org.bukkit.craftbukkit.v1_19_R1.CraftServer
 import org.bukkit.generator.BiomeProvider
 import org.bukkit.generator.WorldInfo
+import kotlin.jvm.optionals.getOrDefault
 import net.minecraft.world.level.biome.Biome as NmsBiome
 
 class ListBiomeProvider(
@@ -38,6 +39,7 @@ class ListBiomeProvider(
     private val largeBiomeNoiseGeneratorSettings = BuiltinRegistries.NOISE_GENERATOR_SETTINGS
         .getHolderOrThrow(NoiseGeneratorSettings.LARGE_BIOMES)
 
+    @OptIn(ExperimentalStdlibApi::class)
     override fun getBiome(worldInfo: WorldInfo, x: Int, y: Int, z: Int): Biome {
         val randomState = RandomState.create(
             largeBiomeNoiseGeneratorSettings.value(),
@@ -45,8 +47,10 @@ class ListBiomeProvider(
             worldInfo.seed,
         )
 
-        val nmsBiome = biomeSource.getNoiseBiome(x, y, z, randomState.sampler()).value()
-        return Biome.valueOf(biomeRegistry.getKey(nmsBiome)!!.path.uppercase())
+        return biomeSource.getNoiseBiome(x, y, z, randomState.sampler()).unwrap()
+            .right()
+            .map { Biome.valueOf(biomeRegistry.getKey(it)!!.path.uppercase()) }
+            .getOrDefault(Biome.PLAINS)
     }
 
     override fun getBiomes(worldInfo: WorldInfo): List<Biome> = allowedBiomes
