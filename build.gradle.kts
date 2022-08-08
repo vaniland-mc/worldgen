@@ -41,7 +41,7 @@ dependencies {
         exclude("net.kyori")
     }
 
-    implementation("land.vani.mcorouhlin:mcorouhlin-api:6.0.3")
+    implementation("land.vani.mcorouhlin:mcorouhlin-api:6.0.5")
     implementation("land.vani.mcorouhlin:mcorouhlin-paper:6.0.3")
 //    implementation("land.vani.mcorouhlin:mcorouhlin-api:SNAPSHOT")
 //    implementation("land.vani.mcorouhlin:mcorouhlin-paper:SNAPSHOT")
