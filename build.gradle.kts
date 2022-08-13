@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "land.vani.plugin"
-version = "2.0.0"
+version = "2.1.0"
 
 repositories {
     mavenLocal()
@@ -36,13 +36,13 @@ repositories {
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.21.0")
 
-    paperDevBundle("1.19.1-R0.1-SNAPSHOT")
+    paperDevBundle("1.19.2-R0.1-SNAPSHOT")
     implementation("net.kyori:adventure-extra-kotlin:4.11.0") {
         exclude("net.kyori")
     }
 
-    implementation("land.vani.mcorouhlin:mcorouhlin-api:6.0.5")
-    implementation("land.vani.mcorouhlin:mcorouhlin-paper:6.0.5")
+    implementation("land.vani.mcorouhlin:mcorouhlin-api:7.0.0")
+    implementation("land.vani.mcorouhlin:mcorouhlin-paper:7.0.0")
 //    implementation("land.vani.mcorouhlin:mcorouhlin-api:SNAPSHOT")
 //    implementation("land.vani.mcorouhlin:mcorouhlin-paper:SNAPSHOT")
 
