@@ -2,7 +2,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.8.0"
+    kotlin("jvm") version "1.8.10"
 
     id("org.jetbrains.kotlinx.kover") version "0.6.1"
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
@@ -46,7 +46,7 @@ dependencies {
 //    implementation("land.vani.mcorouhlin:mcorouhlin-api:SNAPSHOT")
 //    implementation("land.vani.mcorouhlin:mcorouhlin-paper:SNAPSHOT")
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
     testImplementation("io.kotest:kotest-runner-junit5:5.5.4")
