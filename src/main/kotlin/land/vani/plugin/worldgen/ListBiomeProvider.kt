@@ -3,7 +3,7 @@ package land.vani.plugin.worldgen
 import com.mojang.serialization.Lifecycle
 import net.minecraft.core.MappedRegistry
 import net.minecraft.core.Registry
-import net.minecraft.data.BuiltinRegistries
+import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.biome.MultiNoiseBiomeSource
@@ -11,7 +11,7 @@ import net.minecraft.world.level.levelgen.NoiseGeneratorSettings
 import net.minecraft.world.level.levelgen.RandomState
 import org.bukkit.Bukkit
 import org.bukkit.block.Biome
-import org.bukkit.craftbukkit.v1_19_R1.CraftServer
+import org.bukkit.craftbukkit.v1_19_R2.CraftServer
 import org.bukkit.generator.BiomeProvider
 import org.bukkit.generator.WorldInfo
 import kotlin.jvm.optionals.getOrDefault
@@ -25,25 +25,25 @@ class ListBiomeProvider(
             ResourceLocation("vaniland", "biomes")
         ),
         Lifecycle.stable(),
-        null
+        false
     ).apply {
         allowedBiomes.forEach { biome ->
             val resourceKey = ResourceKey.create(
-                Registry.BIOME_REGISTRY,
+                Registries.BIOME,
                 ResourceLocation(biome.name.lowercase())
             )
             register(resourceKey, DEFAULT_BIOME_REGISTRY.getOrThrow(resourceKey), Lifecycle.stable())
         }
     }
-    private val biomeSource = MultiNoiseBiomeSource.Preset.OVERWORLD.biomeSource(biomeRegistry)
-    private val largeBiomeNoiseGeneratorSettings = BuiltinRegistries.NOISE_GENERATOR_SETTINGS
-        .getHolderOrThrow(NoiseGeneratorSettings.LARGE_BIOMES)
+    private val biomeSource = MultiNoiseBiomeSource.Preset.OVERWORLD.biomeSource(biomeRegistry.asLookup())
+    private val largeBiomeNoiseGeneratorSettings =
+        DEDICATED_SERVER.registryAccess().registryOrThrow(Registries.NOISE_SETTINGS)
+            .getOrThrow(NoiseGeneratorSettings.LARGE_BIOMES)
 
-    @OptIn(ExperimentalStdlibApi::class)
     override fun getBiome(worldInfo: WorldInfo, x: Int, y: Int, z: Int): Biome {
         val randomState = RandomState.create(
-            largeBiomeNoiseGeneratorSettings.value(),
-            DEDICATED_SERVER.registryAccess().registryOrThrow(Registry.NOISE_REGISTRY),
+            largeBiomeNoiseGeneratorSettings,
+            DEDICATED_SERVER.registryAccess().registryOrThrow(Registries.NOISE).asLookup(),
             worldInfo.seed,
         )
 
@@ -57,6 +57,6 @@ class ListBiomeProvider(
 
     companion object {
         private val DEDICATED_SERVER = (Bukkit.getServer() as CraftServer).server
-        private val DEFAULT_BIOME_REGISTRY = DEDICATED_SERVER.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY)
+        private val DEFAULT_BIOME_REGISTRY = DEDICATED_SERVER.registryAccess().registryOrThrow(Registries.BIOME)
     }
 }

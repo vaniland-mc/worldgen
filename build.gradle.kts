@@ -36,7 +36,7 @@ repositories {
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.22.0")
 
-    paperDevBundle("1.19.2-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.19.3-R0.1-SNAPSHOT")
     implementation("net.kyori:adventure-extra-kotlin:4.12.0") {
         exclude("net.kyori")
     }
